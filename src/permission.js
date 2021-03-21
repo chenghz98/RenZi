@@ -4,12 +4,15 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 const whiteList = ['/login', '/404']
 // 路由前置守卫
-router.beforeEach(function(to, from, next) {
+router.beforeEach(async function(to, from, next) {
   NProgress.start()
   if (store.getters.token) {
     if (to.path === '/login') {
       next('/')
     } else {
+      if (!store.getters.userId) {
+        await store.dispatch('user/getUserInfo')
+      }
       next()
     }
   } else {
