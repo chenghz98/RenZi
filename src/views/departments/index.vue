@@ -1,47 +1,52 @@
 <template>
   <div class="dashboard-container">
     <div class="app-container">
-      <el-card>
-        <el-row type="flex" justify="space-between">
-          <el-col><span>江苏传智播客学院有限公司</span></el-col>
-          <el-col :span="4">
-            <el-row type="flex" justify="space-between">
-              <el-col><span>负责人</span></el-col>
-              <el-col>
-                <el-dropdown>
-                  <span>
-                    操作
-                    <i class="el-icon-arrow-down" />
-                  </span>
-                  <!-- 具名插槽 -->
-                  <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>添加子部门</el-dropdown-item>
-                    <el-dropdown-item>删除部门</el-dropdown-item>
-                    <el-dropdown-item>修改部门</el-dropdown-item>
-                  </el-dropdown-menu>
-                </el-dropdown>
-              </el-col>
-            </el-row>
-          </el-col>
-        </el-row>
+      <el-card class="tree-card">
+        <tree-tools :tree-node="company" :is-root="true" />
+        <el-tree :data="departs" :props="defaultProps" :default-expand-all="true">
+          <tree-tools slot-scope="{ data }" :tree-node="data" />
+        </el-tree>
       </el-card>
     </div>
   </div>
 </template>
 
 <script>
+import TreeTools from './components/tree-tools'
+import { departments } from '@/api/departments'
 export default {
   name: '',
-  components: {},
+  components: { TreeTools },
   props: {},
   data() {
-    return {}
+    return {
+      departs: [],
+      defaultProps: {
+        children: 'children',
+        label: 'name'
+      },
+      company: {}
+    }
   },
   computed: {},
   watch: {},
-  created() {},
+  created() {
+    this.getDepartmentsList()
+  },
   mounted() {},
-  methods: {}
+  methods: {
+    async getDepartmentsList() {
+      const result = await departments()
+      this.company = { name: result.companyName, manager: '负责人' }
+      this.departs = result.depts
+      console.log(result)
+    }
+  }
 }
 </script>
-<style scoped lang="less"></style>
+<style scoped>
+.tree-card {
+  padding: 30px  140px;
+  font-size:14px;
+}
+</style>
