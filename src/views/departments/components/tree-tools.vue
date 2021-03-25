@@ -6,26 +6,26 @@
       <el-row type="flex" justify="space-between">
         <el-col><span>{{ treeNode.manager }}</span></el-col>
         <el-col>
-          <el-dropdown>
+          <el-dropdown @command="operateDepts">
             <span>
               操作
               <i class="el-icon-arrow-down" />
             </span>
             <!-- 具名插槽 -->
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>添加子部门</el-dropdown-item>
-              <el-dropdown-item v-if="!isRoot">编辑部门</el-dropdown-item>
-              <el-dropdown-item v-if="!isRoot">删除部门</el-dropdown-item>
+              <el-dropdown-item command="add">添加子部门</el-dropdown-item>
+              <el-dropdown-item v-if="!isRoot" command="edit">编辑部门</el-dropdown-item>
+              <el-dropdown-item v-if="!isRoot" command="del">删除部门</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </el-col>
       </el-row>
     </el-col>
   </el-row>
-
 </template>
 
 <script>
+import { delDepartments } from '@/api/departments'
 export default {
   name: 'TreeTools',
   components: {},
@@ -46,7 +46,29 @@ export default {
   watch: {},
   created() {},
   mounted() {},
-  methods: {}
+  methods: {
+    operateDepts(type) {
+      if (type === 'add') {
+        // 增加子部门
+        this.$emit('addDept', this.treeNode)
+      } else if (type === 'edit') {
+        // 修改部门信息
+        this.$emit('editDepts', this.treeNode)
+      } else {
+        // del删除部门
+        this.$confirm('您是否确认删除该部门？', {
+          distinguishCancelAndClose: true,
+          confirmButtonText: '确认',
+          cancelButtonText: '取消'
+        }).then(() => {
+          return delDepartments(this.treeNode.id)
+        }).then(() => {
+          this.$emit('delDepts')
+          this.$message.success('删除部门成功')
+        })
+      }
+    }
+  }
 }
 </script>
 <style scoped lang="less"></style>
