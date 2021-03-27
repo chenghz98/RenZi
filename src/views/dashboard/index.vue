@@ -1,6 +1,12 @@
 <template>
   <div class="dashboard-container">
     <div class="dashboard-text">name: {{ name }}</div>
+    <!-- <page-tools :show-before="true">
+      <template v-slot:before>
+        <span>我想hhhhhh</span>
+      </template>
+    </page-tools> -->
+    <upload-excel />
   </div>
 </template>
 
