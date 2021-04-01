@@ -2,10 +2,15 @@
   <div class="job-info">
     <!-- 基础信息 -->
     <el-form label-width="220px">
+
       <div class="block">
         <div class="title">基础信息</div>
         <el-form-item label="岗位">
-          <el-input v-model="formData.post" placeholder="请输入" class="inputW" />
+          <el-input
+            v-model="formData.post"
+            placeholder="请输入"
+            class="inputW"
+          />
         </el-form-item>
         <!-- <el-form-item label="转正日期">
           <el-date-picker
@@ -16,7 +21,11 @@
           />
         </el-form-item> -->
         <el-form-item label="转正状态">
-          <el-select v-model="formData.stateOfCorrection" placeholder="请选择" disabled>
+          <el-select
+            v-model="formData.stateOfCorrection"
+            placeholder="请选择"
+            disabled
+          >
             <el-option
               v-for="item in EmployeeEnum.stateOfCorrection"
               :key="item.value"
@@ -28,20 +37,50 @@
           <el-input v-model="formData.rank" class="inputW" />
         </el-form-item>
         <el-form-item label="转正评价">
-          <el-input v-model="formData.correctionEvaluation" type="textarea" placeholder="1-300位字符" />
+          <el-input
+            v-model="formData.correctionEvaluation"
+            type="textarea"
+            placeholder="1-300位字符"
+          />
         </el-form-item>
         <el-form-item label="汇报对象">
-          <el-select v-model="formData.reportId" filterable placeholder="请选择" class="inputW">
-            <el-option v-for="item in depts" :key="item.id" :label="item.username" :value="item.id" />
+          <el-select
+            v-model="formData.reportId"
+            filterable
+            placeholder="请选择"
+            class="inputW"
+          >
+            <el-option
+              v-for="item in depts"
+              :key="item.id"
+              :label="item.username"
+              :value="item.id"
+            />
           </el-select>
         </el-form-item>
         <el-form-item label="HRBP">
-          <el-select v-model="formData.hrbp" filterable placeholder="请选择" class="inputW">
-            <el-option v-for="item in depts" :key="item.id" :label="item.username" :value="item.id" class="inputW" />
+          <el-select
+            v-model="formData.hrbp"
+            filterable
+            placeholder="请选择"
+            class="inputW"
+          >
+            <el-option
+              v-for="item in depts"
+              :key="item.id"
+              :label="item.username"
+              :value="item.id"
+              class="inputW"
+            />
           </el-select>
         </el-form-item>
         <el-form-item class="formInfo" label="调整司龄(天)：">
-          <el-input v-model="formData.adjustmentAgedays" type="number" placeholder="请输入" class="inputW" />
+          <el-input
+            v-model="formData.adjustmentAgedays"
+            type="number"
+            placeholder="请输入"
+            class="inputW"
+          />
         </el-form-item>
         <el-form-item label="首次参加工作时间">
           <el-date-picker
@@ -51,7 +90,12 @@
           />
         </el-form-item>
         <el-form-item label="调整工龄">
-          <el-input v-model="formData.adjustmentOfLengthOfService" placeholder="0.00年" class="inputW" disabled />
+          <el-input
+            v-model="formData.adjustmentOfLengthOfService"
+            placeholder="0.00年"
+            class="inputW"
+            disabled
+          />
         </el-form-item>
       </div>
       <!-- 合同信息 -->
@@ -80,7 +124,7 @@
         </el-form-item>
         <el-form-item label="现合同结束时间">
           <el-date-picker
-            v-model="formData.closingTimeOfCurrentContract	"
+            v-model="formData.closingTimeOfCurrentContract"
             type="date"
             placeholder="选择日期"
           />
@@ -110,7 +154,10 @@
       <div class="block">
         <div class="title">招聘信息</div>
         <el-form-item label="其他招聘渠道">
-          <el-select v-model="formData.otherRecruitmentChannels" placeholder="请选择">
+          <el-select
+            v-model="formData.otherRecruitmentChannels"
+            placeholder="请选择"
+          >
             <el-option
               v-for="item in EmployeeEnum.resumeSource"
               :key="item.id"
@@ -120,7 +167,10 @@
           </el-select>
         </el-form-item>
         <el-form-item label="招聘渠道">
-          <el-select v-model="formData.recruitmentChannels" placeholder="请选择">
+          <el-select
+            v-model="formData.recruitmentChannels"
+            placeholder="请选择"
+          >
             <el-option
               v-for="item in EmployeeEnum.resumeSource"
               :key="item.value"
@@ -140,7 +190,11 @@
           </el-select>
         </el-form-item>
         <el-form-item label="推荐企业/人">
-          <el-input v-model="formData.recommenderBusinessPeople" placeholder="请输入" class="infoPosition inputW" />
+          <el-input
+            v-model="formData.recommenderBusinessPeople"
+            placeholder="请输入"
+            class="infoPosition inputW"
+          />
         </el-form-item>
       </div>
       <!-- 从业信息 -->
@@ -150,7 +204,6 @@
       </el-form-item>
     </el-form>
   </div>
-
 </template>
 
 <script>
@@ -210,7 +263,6 @@ export default {
       await updateJob(this.formData)
       this.$message.success('更新成功')
     }
-
   }
 }
 </script>

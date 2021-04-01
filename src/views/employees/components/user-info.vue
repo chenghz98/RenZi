@@ -2,6 +2,7 @@
   <div class="user-info">
     <!-- 个人信息 -->
     <el-form label-width="220px">
+
       <!-- 工号 入职时间 -->
       <el-row class="inline-info">
         <el-col :span="12">
@@ -374,6 +375,7 @@ export default {
     },
     async getPersonalDetail() {
       this.formData = await getPersonalDetail(this.userId)
+      console.log(this.formData, 1212)
       if (this.formData.staffPhoto) {
         this.$refs.myStaffPhoto.fileList = [{ url: this.formData.staffPhoto, upload: true }]
       }

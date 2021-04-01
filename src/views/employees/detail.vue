@@ -17,10 +17,24 @@
             </el-form>
           </el-tab-pane>
           <el-tab-pane label="个人详情" name="second">
+            <el-row type="flex" justify="end">
+              <el-tooltip content="打印个人基本信息">
+                <router-link :to="`/employees/print/${userId}?type=personal`">
+                  <i class="el-icon-printer" />
+                </router-link>
+              </el-tooltip>
+            </el-row>
             <!-- <user-info /> -->
             <component :is="UserComponent" />
           </el-tab-pane>
           <el-tab-pane label="岗位信息" name="third">
+            <el-row type="flex" justify="end">
+              <el-tooltip content="打印个人基本信息">
+                <router-link :to="`/employees/print/${userId}?type=job`">
+                  <i class="el-icon-printer" />
+                </router-link>
+              </el-tooltip>
+            </el-row>
             <component :is="JobComponent" />
           </el-tab-pane>
         </el-tabs>
